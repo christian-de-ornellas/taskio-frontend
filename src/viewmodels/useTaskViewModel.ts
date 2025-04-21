@@ -1,7 +1,6 @@
-import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { useQuery, useQueryClient, useMutation } from '@tanstack/react-query';
 import { taskService } from '@/models/taskService';
-import { TSTATUS } from '@/models/task';
-import { ITask } from '@/models/task'; // <- Certifique-se que o tipo está aqui
+import { TSTATUS, ITask } from '@/models/task';
 
 export function useTaskViewModel(status: TSTATUS) {
   const queryKey = 'tasks';
@@ -12,10 +11,20 @@ export function useTaskViewModel(status: TSTATUS) {
     queryFn: () => taskService.getByStatus(status),
   });
 
+  const createTaskMutation = useMutation({
+    mutationFn: (newTask: Omit<ITask, 'id'>) => taskService.create(newTask),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: [queryKey, status] });
+    },
+  });
+
   return {
     tasks: data,
     isLoading,
     isError,
+    createTask: createTaskMutation.mutate,
+    createTaskAsync: createTaskMutation.mutateAsync,
+    isCreating: createTaskMutation.isPending,
     queryClient,
   };
 }
