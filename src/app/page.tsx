@@ -1,56 +1,38 @@
 'use client';
 
 import { useTaskViewModel } from '@/viewmodels/useTaskViewModel';
-import { ITask } from '@/models/task';
+import { ITask, TSTATUS } from '@/models/task';
+import TaskCard from '@/components/TaskCard';
+import TaskColumn from '@/components/TaskColumn';
 
 export default function Page() {
-  const TODO = useTaskViewModel('BACKLOG');
-  const DOING = useTaskViewModel('DOING');
-  const DONE = useTaskViewModel('DONE');
+  const statusLabels: Record<TSTATUS, string> = {
+    BACKLOG: 'Backlog',
+    DOING: 'Doing',
+    DONE: 'Done',
+  };
+
+  const statuses: TSTATUS[] = ['BACKLOG', 'DOING', 'DONE'];
+
+  const viewModels = {
+    BACKLOG: useTaskViewModel('BACKLOG'),
+    DOING: useTaskViewModel('DOING'),
+    DONE: useTaskViewModel('DONE'),
+  };
 
   return (
     <div className="flex gap-x-10">
-      <section className="bg-purple-900 w-96 rounded-lg flex flex-col h-full px-4">
-        <header className="py-2 shrink-0">
-          <h2 className="text-gray-50">Todo</h2>
-        </header>
-
-        <div className="flex flex-col gap-2 overflow-y-auto h-full pb-4">
-          {TODO.tasks?.map((task: ITask) => (
-            <article key={task.id} className="bg-gray-100 rounded-lg p-2">
-              <h4>{task.title}</h4>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className="bg-purple-900 w-96 rounded-lg flex flex-col h-full px-4">
-        <header className="py-2 shrink-0">
-          <h2 className="text-gray-50">Doing</h2>
-        </header>
-
-        <div className="flex flex-col gap-2 overflow-y-auto h-full pb-4">
-          {DOING.tasks?.map((task: ITask) => (
-            <article key={task.id} className="bg-gray-100 rounded-lg p-2">
-              <h4>{task.title}</h4>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className="bg-purple-900 w-96 rounded-lg flex flex-col h-full px-4">
-        <header className="py-2 shrink-0">
-          <h2 className="text-gray-50">Done</h2>
-        </header>
-
-        <div className="flex flex-col gap-2 overflow-y-auto h-full pb-4">
-          {DONE.tasks?.map((task: ITask) => (
-            <article key={task.id} className="bg-gray-100 rounded-lg p-2">
-              <h4>{task.title}</h4>
-            </article>
-          ))}
-        </div>
-      </section>
+      {statuses.map((status) => {
+        const { tasks } = viewModels[status];
+        return (
+          <TaskColumn.Container key={status}>
+            <TaskColumn.Header title={statusLabels[status]} />
+            <TaskCard.Container>
+              {tasks?.map((task: ITask) => <TaskCard.Title key={task.id} title={task.title} />)}
+            </TaskCard.Container>
+          </TaskColumn.Container>
+        );
+      })}
     </div>
   );
 }
