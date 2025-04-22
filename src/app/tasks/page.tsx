@@ -5,6 +5,7 @@ import { ITask, TSTATUS } from '@/models/task';
 import TaskCard from '@/components/TaskCard';
 import TaskColumn from '@/components/TaskColumn';
 import { Loading } from '@/components/Loading';
+import NewTask from '@/components/NewTask';
 
 export default function TasksView() {
   const statusLabels: Record<TSTATUS, string> = {
@@ -31,6 +32,7 @@ export default function TasksView() {
             {isLoading && <Loading />}
             <TaskCard.Container>
               {tasks?.map((task: ITask) => <TaskCard.Title key={task.id} title={task.title} />)}
+              {status && <NewTask status={status} />}
             </TaskCard.Container>
           </TaskColumn.Container>
         );
