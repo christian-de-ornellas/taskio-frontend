@@ -51,6 +51,18 @@ export function useTaskViewModel(status: TSTATUS) {
     }
   };
 
+  const updateStatusMutation = useMutation({
+    mutationFn: ({ id, status }: { id: string; status: TSTATUS }) =>
+      taskService.updateStatus(id, { status }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: [queryKey] });
+    },
+  });
+
+  const onDropTask = (taskId: string, newStatus: TSTATUS) => {
+    updateStatusMutation.mutate({ id: taskId, status: newStatus });
+  };
+
   return {
     tasks: data,
     isLoading,
@@ -66,5 +78,6 @@ export function useTaskViewModel(status: TSTATUS) {
     title,
     setTitle,
     createTaskMutation,
+    onDropTask,
   };
 }
