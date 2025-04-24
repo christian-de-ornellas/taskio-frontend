@@ -19,13 +19,15 @@ const NewTask = ({ status }: NewTaskProps) => {
       value={title}
       onChange={(e) => setTitle(e.target.value)}
       onKeyDown={handleKeyDown}
-      className="appearance-none text-purple-900 placeholder:text-purple-900 w-full
-        focus:bg-purple-100 p-2 rounded-lg focus:outline-none focus:shadow-outline"
+      className="appearance-none text-white placeholder:text-cyan-600 focus:border-cyan-600
+      focus:border-b w-full p-2 focus:outline-none focus:shadow-outline"
       placeholder="Write a task..."
+      title="Aperte as teclas Enter para confirmar os ESC para cancelar"
     />
   ) : (
     <button
-      className="hover:bg-purple-200 hover:text-purple-900 hover:cursor-pointer text-white rounded-lg p-2 text-left transition"
+      className="hover:bg-cyan-600 hover:text-cyan-100 hover:cursor-pointer
+      font-semibold text-white rounded-lg p-2 text-left transition"
       onClick={() => setNewTask(true)}
     >
       + Add a card

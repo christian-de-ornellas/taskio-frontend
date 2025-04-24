@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: 'Taskio',
-  description: 'Gestão de tarefas',
+  description: 'Gestão inteligente de tarefas',
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
@@ -24,7 +24,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     <html lang="en">
       <body>
         <ReactQuery>
-          <div className={`${geistMono} ${geistSans} bg-green-950`}>
+          <div className={`${geistMono} ${geistSans} bg-gray-950`}>
             <Wrapper>{children}</Wrapper>
           </div>
         </ReactQuery>

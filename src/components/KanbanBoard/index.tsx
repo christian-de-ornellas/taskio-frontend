@@ -37,7 +37,7 @@ export default function KanbanBoard({ columns, viewModels }: Props) {
   return (
     <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
       <div className="flex gap-x-10">
-        {columns.map((status) => {
+        {columns.map((status: TSTATUS) => {
           const { tasks, isLoading } = viewModels[status];
           return (
             <TaskColumn.Container key={status}>
