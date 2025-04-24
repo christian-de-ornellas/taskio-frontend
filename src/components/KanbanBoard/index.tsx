@@ -8,7 +8,7 @@ import {
   useSensors,
   DragEndEvent,
 } from '@dnd-kit/core';
-import { ITask, TSTATUS } from '@/models/task';
+import { TSTATUS } from '@/models/task';
 import TaskCard from '@/components/TaskCard';
 import TaskColumn from '@/components/TaskColumn';
 import NewTask from '@/components/NewTask';
