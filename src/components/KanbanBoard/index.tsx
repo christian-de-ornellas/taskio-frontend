@@ -14,6 +14,7 @@ import TaskColumn from '@/components/TaskColumn';
 import NewTask from '@/components/NewTask';
 import { useTaskViewModel } from '@/viewmodels/useTaskViewModel';
 import { Loading } from '@/components/Loading';
+import { Suspense } from 'react';
 
 type Props = {
   columns: TSTATUS[];
@@ -42,18 +43,20 @@ export default function KanbanBoard({ columns, viewModels }: Props) {
           return (
             <TaskColumn.Container key={status}>
               <TaskColumn.Header title={status} />
-              <TaskColumn.Droppable id={status}>
-                {isLoading && <Loading />}
-                {tasks?.map((task) => (
-                  <TaskCard.Draggable
-                    key={task.id}
-                    id={task.id}
-                    status={status}
-                    title={task.title}
-                  />
-                ))}
-                <NewTask status={status} />
-              </TaskColumn.Droppable>
+              <Suspense fallback={<Loading />}>
+                <TaskColumn.Droppable id={status}>
+                  {isLoading && <Loading />}
+                  {tasks?.map((task) => (
+                    <TaskCard.Draggable
+                      key={task.id}
+                      id={task.id}
+                      status={status}
+                      title={task.title}
+                    />
+                  ))}
+                  <NewTask status={status} />
+                </TaskColumn.Droppable>
+              </Suspense>
             </TaskColumn.Container>
           );
         })}
