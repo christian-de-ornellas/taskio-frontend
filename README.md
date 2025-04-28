@@ -61,3 +61,14 @@ yarn install
 🌎 Deploy
 
 O deploy pode ser realizado facilmente utilizando Vercel.
+
+🌎 Deploy
+
+O deploy pode ser realizado facilmente utilizando Vercel.
+
+Nota: O taskio-frontend precisa do taskio-backend rodando para funcionar corretamente.
+
+🔗 Repositório do Backend
+
+Para o backend, acesse o repositório do taskio-backend:
+https://github.com/christian-de-ornellas/taskio-backend
