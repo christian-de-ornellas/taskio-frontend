@@ -22,7 +22,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
-      <body>
+      <body inmaintabuse="1">
         <ReactQuery>
           <div className={`${geistMono} ${geistSans} bg-gray-950`}>
             <Wrapper>{children}</Wrapper>
