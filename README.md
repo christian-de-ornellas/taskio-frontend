@@ -58,9 +58,6 @@ yarn install
 	•	lint: Executa o lint no código fonte
 ```
 
-🌎 Deploy
-
-O deploy pode ser realizado facilmente utilizando Vercel.
 
 🌎 Deploy
 
