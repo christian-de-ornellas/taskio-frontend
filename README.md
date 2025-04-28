@@ -48,7 +48,22 @@ npm install
 # ou
 yarn install
 ```
-4.	Acesse http://localhost:3000 no seu navegador.
+3.	Execute o servidor:
+
+```bash
+npm run start
+# ou
+yarn start
+```
+
+4. Crie o arquivo e adicione a base url da api .env
+```bash
+NEXT_PUBLIC_API_URL=http://localhost:3000 
+```
+
+5. Acesse http://localhost:3000 no seu navegador.
+
+Obs: O repositório taskio-backend precisa estar sendo executado.
 
 ```
 📜 Scripts Disponíveis
